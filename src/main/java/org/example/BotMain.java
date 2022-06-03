@@ -139,33 +139,6 @@ public class BotMain {
 
 
 
-        //GIFS(Funcional)
-
-        EmbedCreateSpec embedGIF = EmbedCreateSpec.builder()
-                .image("https://c.tenor.com/ZU3owNOylsEAAAAC/el-baile-de-el-troleo.gif")
-                .build();
-        gateway.on(MessageCreateEvent.class).subscribe(event -> {
-            final Message message = event.getMessage();
-            if ("/gif".equals(message.getContent())) {
-                final MessageChannel channel = message.getChannel().block();
-                channel.createMessage(embedGIF).block();
-            }
-        });
-
-        //LISTAR FICHEROS(Funcional)
-
-        String directorio = "/home/dam1/Documentos/ENDERMAITER/COD/ImagenesBot";
-        File carpeta = new File(directorio);
-        String[] listado = carpeta.list();
-        gateway.on(MessageCreateEvent.class).subscribe(event -> {
-            final Message message = event.getMessage();
-            if ("/list".equals(message.getContent())) {
-                for (int i = 0; i < listado.length; i++) {
-                    final MessageChannel channel = message.getChannel().block();
-                    channel.createMessage(listado[i]).block();
-                }
-            }
-        });
 
         //OBTENER IMAGEN(BETA)
 
@@ -243,7 +216,7 @@ public class BotMain {
 
             for (com.google.api.services.drive.model.File file : filesImagenes) {
 
-                // guardamos el 'stream' en el fichero shreck.jpeg que tiene que existir
+              
 
                 OutputStream outputStream = null;
                 try {
