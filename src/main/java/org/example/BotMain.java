@@ -99,7 +99,7 @@ public class BotMain {
 
         //***DISCORD CODE***
 
-        final String token = "OTUzNjMxMTc4OTI4MzEyMzYx.GIECpE.rYHQ6CmZhsZyv39i5DJQgh6F-R4ERuRATKXJ1c";
+        final String token = "OTUzNjMxMTc4OTI4MzEyMzYx.GraO0H.WQXZ1QRxweot4JL7fFQrehB81BVUjcDoTfJldg";
         final DiscordClient client = DiscordClient.create(token);
         final GatewayDiscordClient gateway = client.login().block();
 
@@ -136,69 +136,6 @@ public class BotMain {
                 channel.createMessage(embed).block();
             }
         });
-
-
-
-        //GIFS(Funcional)
-
-        EmbedCreateSpec embedGIF = EmbedCreateSpec.builder()
-                .image("https://c.tenor.com/ZU3owNOylsEAAAAC/el-baile-de-el-troleo.gif")
-                .build();
-        gateway.on(MessageCreateEvent.class).subscribe(event -> {
-            final Message message = event.getMessage();
-            if ("/gif".equals(message.getContent())) {
-                final MessageChannel channel = message.getChannel().block();
-                channel.createMessage(embedGIF).block();
-            }
-        });
-
-        //LISTAR FICHEROS(Funcional)
-
-        String directorio = "/home/dam1/Documentos/ENDERMAITER/COD/ImagenesBot";
-        File carpeta = new File(directorio);
-        String[] listado = carpeta.list();
-        gateway.on(MessageCreateEvent.class).subscribe(event -> {
-            final Message message = event.getMessage();
-            if ("/list".equals(message.getContent())) {
-                for (int i = 0; i < listado.length; i++) {
-                    final MessageChannel channel = message.getChannel().block();
-                    channel.createMessage(listado[i]).block();
-                }
-            }
-        });
-
-        //OBTENER IMAGEN(BETA)
-
-        //embeds
-
-        EmbedCreateSpec embedImagen1 = EmbedCreateSpec.builder()
-                .color(Color.GREEN)
-                .title("shreck.jpeg")
-                .image("attachment://home/dam1/Documentos/ENDERMAITER/COD/ImagenesBot/shreck.jpeg")
-                .build();
-
-        //comandos /get
-
-        gateway.on(MessageCreateEvent.class).subscribe(event -> {
-            final Message message = event.getMessage();
-            if ("/get shreck.jpeg".equals(message.getContent())) {
-                final MessageChannel channel = message.getChannel().block();
-
-                InputStream fileAsInputStream = null;
-                try {
-                    fileAsInputStream = new FileInputStream("/home/dam1/Documentos/ENDERMAITER/COD/ImagenesBot/shreck.jpeg");
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                ;
-
-                channel.createMessage(MessageCreateSpec.builder()
-                        .addFile("shreck.jpeg", fileAsInputStream)
-                        .addEmbed(embedImagen1)
-                        .build()).subscribe();
-            }
-        });
-
 
 
         //GOOGLE CODE
